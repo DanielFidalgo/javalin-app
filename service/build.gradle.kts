@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.provider.inClassPathMode
-
 plugins {
     kotlin("jvm") version "1.8.20"
     kotlin("kapt")
@@ -10,6 +8,7 @@ plugins {
     id("org.flywaydb.flyway") version "9.16.0"
     id("nu.studer.jooq") version "8.2"
     application
+    checkstyle
 }
 
 group = "io.github.danielfidalgo"
@@ -102,11 +101,10 @@ flyway {
 }
 
 jooq {
-    version.set("3.18.2")  // default (can be omitted)
-    edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)  // default (can be omitted)
+    version.set(libs.jooq.get().versionConstraint.requiredVersion)
     configurations {
-        create("main") {  // name of the jOOQ configuration
-            generateSchemaSourceOnCompilation.set(true)  // default (can be omitted)
+        create("main") {
+            generateSchemaSourceOnCompilation.set(true)
             jooqConfiguration.apply {
                 logging = org.jooq.meta.jaxb.Logging.WARN
                 jdbc.apply {
@@ -126,21 +124,18 @@ jooq {
                     }
                     generate.apply {
                         isDeprecated = false
-                        //isRecords = false
                         isPojosAsKotlinDataClasses = true
-                        //isImmutablePojos = true
                         isFluentSetters = true
                         isDaos = true
                         isImplicitJoinPathsAsKotlinProperties = true
                         isKotlinSetterJvmNameAnnotationsOnIsPrefix = true
-
                         isKotlinNotNullPojoAttributes = false
                         isKotlinNotNullRecordAttributes = true
                         isKotlinNotNullInterfaceAttributes = false
                     }
                     target.apply {
                         packageName = "infrastructure"
-                        directory = "${buildDir}/generated/main/kotlin/jooq/"  // default (can be omitted)
+                        directory = "${buildDir}/generated/main/kotlin/jooq/"
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
                 }

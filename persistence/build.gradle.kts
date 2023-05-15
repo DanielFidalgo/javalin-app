@@ -8,14 +8,11 @@ repositories {
 }
 
 dependencies {
-    api("org.jooq:jooq:3.18.3")
-    api("io.agroal:agroal-pool:2.1")
-    api("org.flywaydb:flyway-core:9.16.0")
+    api(libs.jooq)
+    api(libs.agroal)
+    api(libs.flyway)
 }
 
 kotlin {
     jvmToolchain(17)
 }
-
-
-

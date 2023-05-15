@@ -28,7 +28,7 @@ abstract class AppConfig {
         return 200
     }
 
-    abstract fun datasource(): JdbcConfig
+    abstract fun jdbcConfig(): JdbcConfig
 
     companion object {
         private const val APP_NAME = "Javalin service"

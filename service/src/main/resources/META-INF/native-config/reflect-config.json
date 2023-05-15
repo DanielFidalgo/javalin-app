@@ -4,12 +4,6 @@
   "unsafeAllocated":true
 },
 {
-  "name":"com.ibm.icu.text.Collator"
-},
-{
-  "name":"com.ibm.lang.management.OperatingSystemMXBean"
-},
-{
   "name":"com.sun.management.GarbageCollectionNotificationInfo"
 },
 {
@@ -75,8 +69,7 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"java.lang.String",
-  "fields":[{"name":"TYPE"}]
+  "name":"java.lang.String"
 },
 {
   "name":"java.lang.System",
@@ -84,8 +77,7 @@
 },
 {
   "name":"java.lang.Thread",
-  "fields":[{"name":"threadLocalRandomProbe"}],
-  "methods":[{"name":"isVirtual","parameterTypes":[] }]
+  "fields":[{"name":"threadLocalRandomProbe"}]
 },
 {
   "name":"java.lang.Void",
@@ -125,8 +117,7 @@
   "name":"java.util.Date"
 },
 {
-  "name":"java.util.concurrent.Executors",
-  "methods":[{"name":"newVirtualThreadPerTaskExecutor","parameterTypes":[] }]
+  "name":"java.util.concurrent.Executors"
 },
 {
   "name":"java.util.concurrent.atomic.AtomicBoolean",
@@ -179,16 +170,12 @@
   "name":"org.slf4j.Logger"
 },
 {
-  "name":"org.slf4j.impl.StaticLoggerBinder"
-},
-{
   "name":"org.slf4j.spi.SLF4JServiceProvider"
 },
 {
   "name":"sun.security.provider.NativePRNG",
   "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }
+    {"name":"<init>","parameterTypes":[] }
   ]
 },
 {

@@ -1,6 +1,5 @@
 package sql
 
-import sql.datasources.DatasourceFactory
 import java.time.Duration
 
 data class JdbcConfig(val driverClass: String,
@@ -11,5 +10,4 @@ data class JdbcConfig(val driverClass: String,
                       val minPool: Int,
                       val maxPool: Int,
                       val acquireIncrement: Int,
-                      val idleConnectionTestPeriod: Duration,
-                      val datasourceFactory: DatasourceFactory)
+                      val idleConnectionTestPeriod: Duration)

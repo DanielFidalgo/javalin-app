@@ -21,6 +21,9 @@ dependencyResolutionManagement {
             library("kotlinx.coroutines", "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             library("ksp.processing.api", "com.google.devtools.ksp:symbol-processing-api:1.8.10-1.0.9")
             library("kotlinPoet", "com.squareup:kotlinpoet-ksp:1.12.0")
+            library("jooq", "org.jooq:jooq:3.18.3")
+            library("agroal", "io.agroal:agroal-pool:2.1")
+            library("flyway", "org.flywaydb:flyway-core:9.16.0")
         }
 
         create("testLibs") {

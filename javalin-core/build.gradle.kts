@@ -26,9 +26,4 @@ tasks.getByName<Test>("test") {
 
 kotlin {
     jvmToolchain(17)
-    sourceSets {
-        dependencies {
-
-        }
-    }
 }

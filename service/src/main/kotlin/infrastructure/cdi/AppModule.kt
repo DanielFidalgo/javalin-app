@@ -18,6 +18,7 @@ import io.micrometer.core.instrument.MeterRegistry
 import io.micrometer.core.instrument.composite.CompositeMeterRegistry
 import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
+import sql.datasources.DatasourceFactory
 import javax.inject.Singleton
 import javax.sql.DataSource
 
@@ -60,14 +61,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesAgroalDataSource(appConfig: AppConfig): AgroalDataSource {
-        val jdbcConfig = appConfig.datasource()
-        return jdbcConfig.datasourceFactory.create(jdbcConfig) as AgroalDataSource
-    }
-
-    @Provides
-    @Singleton
-    fun providesDataSource(ds: AgroalDataSource): DataSource {
-        return ds
+    fun providesDataSource(appConfig: AppConfig): DataSource {
+        return  DatasourceFactory.AGROAL.create(appConfig.jdbcConfig())
     }
 }
