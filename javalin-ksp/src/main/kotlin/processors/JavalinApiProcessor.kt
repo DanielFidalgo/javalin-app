@@ -14,8 +14,7 @@ class JavalinApiProcessor(private val logger: KSPLogger,
                           private val codeGenerator: CodeGenerator,
                           options: Map<String, String>) : SymbolProcessor {
     internal val mapOfClasses = mutableMapOf<String, ClassName>()
-    private val fileSpec: FileSpec.Builder =
-        FileSpec.builder(options[OPTION_GENERATED_PACKAGE] ?: "", options[OPTION_GENERATED_CLASS] ?: DEFAULT_CLASS_NAME)
+    private val fileSpec: FileSpec.Builder = FileSpec.builder(options[OPTION_GENERATED_PACKAGE] ?: "", options[OPTION_GENERATED_CLASS] ?: DEFAULT_CLASS_NAME)
     private val injectAnnotation = AnnotationSpec.builder(ClassName(INJECT_PACKAGE, INJECT_ANNOTATION)).build()
     internal val constructorSpec =
         FunSpec.constructorBuilder().addAnnotation(injectAnnotation).addParameter(JAVALIN_PARAM, ClassName(JAVALIN_PACKAGE, JAVALIN_NAME))

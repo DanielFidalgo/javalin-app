@@ -29,7 +29,12 @@ class AgroalDatasourceFactory: DatasourceFactory {
                     .validationTimeout(ofSeconds(50))
                     .reapTimeout(ofSeconds(500))
                     .connectionFactoryConfiguration { cf ->
-                        setConnectionConfig(jdbcConfig, cf)
+                        cf.jdbcUrl(jdbcConfig.connectionString)
+                        cf.connectionProviderClassName(jdbcConfig.driverClass)
+                        cf.autoCommit(true)
+                        cf.principal(NamePrincipal(jdbcConfig.user))
+                        cf.credential(SimplePassword(jdbcConfig.password))
+                        cf.jdbcTransactionIsolation(SERIALIZABLE)
                     }
             }
 
@@ -38,17 +43,5 @@ class AgroalDatasourceFactory: DatasourceFactory {
         Runtime.getRuntime().addShutdownHook(Thread { dataSource.close() })
 
         return dataSource!!
-    }
-
-    private fun setConnectionConfig(jdbcConfig: JdbcConfig,
-                                    cf: AgroalConnectionFactoryConfigurationSupplier):
-            AgroalConnectionFactoryConfigurationSupplier {
-        cf.jdbcUrl(jdbcConfig.connectionString)
-        cf.connectionProviderClassName(jdbcConfig.driverClass)
-        cf.autoCommit(true)
-        cf.principal(NamePrincipal(jdbcConfig.user))
-        cf.credential(SimplePassword(jdbcConfig.password))
-        cf.jdbcTransactionIsolation(SERIALIZABLE)
-        return cf
     }
 }

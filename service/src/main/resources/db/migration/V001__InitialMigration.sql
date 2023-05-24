@@ -1,7 +1,7 @@
-CREATE TABLE items (
+CREATE TABLE users (
     id VARCHAR(40) NOT NULL,
-    name VARCHAR(40) NOT NULL,
-    quantity INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
     created DATETIME NOT NULL,
     PRIMARY KEY(id)
 )

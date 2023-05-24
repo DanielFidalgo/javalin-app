@@ -9,8 +9,9 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             library("javalin", "io.javalin:javalin:5.5.0")
-            library("javalin.openapi", "io.javalin.community.openapi:javalin-openapi-plugin:5.4.2")
-            library("javalin.swagger", "io.javalin.community.openapi:javalin-swagger-plugin:5.4.2")
+            library("javalin.openapi", "io.javalin.community.openapi:javalin-openapi-plugin:5.5.0")
+            library("javalin.swagger", "io.javalin.community.openapi:javalin-swagger-plugin:5.5.0")
+            library("javalin.openapi.processor","io.javalin.community.openapi:openapi-annotation-processor:5.5.0")
             library("micrometer", "io.micrometer:micrometer-core:1.10.5")
             library("micrometer.prometheus", "io.micrometer:micrometer-registry-prometheus:1.10.5")
             library("slf4j", "org.slf4j:slf4j-simple:2.0.5")

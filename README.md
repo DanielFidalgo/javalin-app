@@ -12,7 +12,7 @@ A multimodule kotlin jvm app building native  with GraalVM
 ## Running the application
 To start on standard jvm:
 ```shell
-./gradlew clean run
+./gradlew clean run --continue 
 ```
 
 ### Preparing for Native Build
@@ -20,6 +20,13 @@ Your Application may rely on some reflections from dependencies.
 This app can execute with GraalVM's tracing agent to support these cases.
 To run with the agent:
 ```shell
-./gradlew clean run -PgraalvmAgent
+./gradlew clean run -PgraalvmAgent --continue
 ```
 This will store the configuration files under [META-INF/native-config](service/src/main/resources/META-INF/native-config) in the service Module
+
+### Running Native
+To run a native build app execute
+```shell
+./gradlew clean nativeRun
+```
+

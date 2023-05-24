@@ -19,7 +19,7 @@ class RootResource @Inject constructor(private val meterRegistry: MeterRegistry)
         it.status(HttpStatus.OK)
     }
 
-    @OpenApi(path="/ping", methods = [HttpMethod.GET])
+    @OpenApi(path="/ping", methods = [HttpMethod.GET], )
     fun ping() = Handler {
         it.result("pong")
         it.status(HttpStatus.OK)

@@ -1,3 +1,5 @@
+package web
+
 import io.javalin.json.JsonMapper
 
 data class JavalinSetup(val port: Int = 7000,

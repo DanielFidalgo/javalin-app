@@ -1,3 +1,5 @@
+package web
+
 import io.javalin.Javalin
 import io.javalin.config.JavalinConfig
 import io.javalin.openapi.plugin.OpenApiPlugin

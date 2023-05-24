@@ -29,7 +29,7 @@ dependencies {
     implementation(project(":persistence"))
     ksp(project(":javalin-ksp"))
     kapt(libs.dagger.compiler)
-    kapt("io.javalin.community.openapi:openapi-annotation-processor:5.4.2")
+    kapt(libs.javalin.openapi.processor)
     implementation("com.h2database:h2:2.1.214")
     jooqGenerator("com.h2database:h2:2.1.214")
     testImplementation(testLibs.jupiter.api)

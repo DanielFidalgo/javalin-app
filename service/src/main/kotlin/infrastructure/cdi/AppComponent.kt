@@ -5,7 +5,7 @@ import infrastructure.Application
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class])
+@Component(modules = [AppModule::class, DomainModule::class])
 interface AppComponent {
     fun inject(application: Application)
 }

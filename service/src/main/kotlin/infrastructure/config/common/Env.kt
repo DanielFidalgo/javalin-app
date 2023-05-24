@@ -8,10 +8,10 @@ enum class Env(val label: String) {
     PROD("prod");
 
     companion object {
-        private val cachedValues: Map<String, Env> = values().map { it }.associateBy({it.label}, {it})
+        private val cachedValues: Map<String, Env> = values().associateBy{ it.label }
 
         fun getByLabel(label: String?): Env {
-            return label?.let { cachedValues[label] ?: STUB } ?: STUB
+            return label?.let { cachedValues[it] ?: STUB } ?: STUB
         }
     }
 }

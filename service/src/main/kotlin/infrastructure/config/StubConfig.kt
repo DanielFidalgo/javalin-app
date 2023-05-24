@@ -12,7 +12,8 @@ class StubConfig: AppConfig() {
     }
 
     override fun jdbcConfig(): JdbcConfig {
-        return JdbcConfig("org.h2.Driver",
+        return JdbcConfig(
+            "org.h2.Driver",
             "jdbc:h2:mem:jooq;INIT=CREATE SCHEMA IF NOT EXISTS jooq\\;SET SCHEMA jooq;MODE=MySQL;",
             "sa",
             "",

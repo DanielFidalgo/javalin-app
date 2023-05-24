@@ -1,7 +1,7 @@
 package infrastructure.config.common
 
+import org.jooq.SQLDialect
 import sql.JdbcConfig
-import javax.sql.DataSource
 
 abstract class AppConfig {
     private val port = System.getenv("APP_PORT")?.toInt() ?: 8080
@@ -26,6 +26,10 @@ abstract class AppConfig {
 
     fun maxThreads(): Int {
         return 200
+    }
+
+    fun sqlDialect(): SQLDialect {
+        return SQLDialect.H2
     }
 
     abstract fun jdbcConfig(): JdbcConfig
