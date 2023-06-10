@@ -1,3 +1,6 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+
 plugins {
     kotlin("jvm") version "1.8.20"
     kotlin("kapt")
@@ -7,6 +10,7 @@ plugins {
     id("com.google.devtools.ksp") version "1.8.20-1.0.11"
     id("org.flywaydb.flyway") version "9.16.0"
     id("nu.studer.jooq") version "8.2"
+    id("io.gitlab.arturbosch.detekt") version "1.23.0"
     application
     checkstyle
 }
@@ -38,6 +42,30 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+detekt {
+    buildUponDefaultConfig = true // preconfigure defaults
+    allRules = false // activate all available (even unstable) rules.
+    config.setFrom("$projectDir/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+    //baseline = file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
+}
+
+tasks.withType<Detekt>().configureEach {
+    reports {
+        html.required.set(true) // observe findings in your browser with structure and code snippets
+        xml.required.set(true) // checkstyle like format mainly for integrations like Jenkins
+        txt.required.set(true) // similar to the console output, contains issue signature to manually edit baseline files
+        sarif.required.set(true) // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with GitHub Code Scanning
+        md.required.set(true) // simple Markdown format
+    }
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "17"
+}
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = "17"
 }
 
 graalvmNative {
@@ -78,6 +106,7 @@ jib {
 ksp {
     arg("javalin.processor.generated.package", "infrastructure")
     arg("javalin.processor.generated.class", "JavalinApi")
+    arg("javalin.processor.ignore.type", "Resource")
 }
 
 kotlin {

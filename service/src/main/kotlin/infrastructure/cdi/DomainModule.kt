@@ -2,7 +2,7 @@ package infrastructure.cdi
 
 import dagger.Module
 import dagger.Provides
-import domain.UserRepository
+import domain.users.UserRepository
 import infrastructure.sql.JooqUserRepository
 import javax.inject.Singleton
 

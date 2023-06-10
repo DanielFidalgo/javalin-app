@@ -1,10 +1,9 @@
 package processors
 
+import com.google.devtools.ksp.findActualType
+import com.google.devtools.ksp.getAllSuperTypes
 import com.google.devtools.ksp.processing.*
-import com.google.devtools.ksp.symbol.KSAnnotated
-import com.google.devtools.ksp.symbol.KSFunctionDeclaration
-import com.google.devtools.ksp.symbol.KSType
-import com.google.devtools.ksp.symbol.KSVisitorVoid
+import com.google.devtools.ksp.symbol.*
 import com.google.devtools.ksp.validate
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ksp.toClassName
@@ -21,6 +20,7 @@ class JavalinApiProcessor(private val logger: KSPLogger,
     private val classSpec = TypeSpec.classBuilder(options[OPTION_GENERATED_CLASS] ?: DEFAULT_CLASS_NAME).addProperty(
         PropertySpec.builder(JAVALIN_PARAM, ClassName(JAVALIN_PACKAGE, JAVALIN_NAME), KModifier.PRIVATE).initializer(JAVALIN_PARAM).build()
     )
+    private val ignoredTypes = options[OPTION_IGNORE_TYPE]?.split(",") ?: listOf()
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val annotationName = "$OPEN_API_PACKAGE.$OPEN_API"
@@ -34,29 +34,35 @@ class JavalinApiProcessor(private val logger: KSPLogger,
 
         @Suppress("UNCHECKED_CAST")
         override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Unit) {
-            val annotation = function.annotations.first { it.shortName.asString() == OPEN_API }
-            val classParam = function.parentDeclaration?.simpleName?.asString()?.let {
-                val result = "${it.substring(0, 1).lowercase()}${it.substring(1)}"
-                val className = ClassName(
-                    function.parentDeclaration?.packageName?.asString()!!,
-                    function.parentDeclaration?.simpleName?.asString()!!
-                )
-                mapOfClasses[result] = className
-                result
-            }
+            val declaration = function.parentDeclaration!! as KSClassDeclaration
+            val superTypes = declaration.getAllSuperTypes()
+            var shouldParse = superTypes.none { s -> ignoredTypes.contains(s.toClassName().simpleName) }
+            if (shouldParse) {
+                val annotation = function.annotations.first { it.shortName.asString() == OPEN_API }
+                val classParam = function.parentDeclaration?.simpleName?.asString()?.let {
+                    val result = "${it.substring(0, 1).lowercase()}${it.substring(1)}"
+                    val className = ClassName(
+                        function.parentDeclaration?.packageName?.asString()!!,
+                        function.parentDeclaration?.simpleName?.asString()!!
+                    )
+                    mapOfClasses[result] = className
+                    result
+                }
 
-            var path = ""
-            var methods = arrayListOf<KSType>()
-            annotation.arguments.forEach {
-                when (it.name?.getShortName()) {
-                    OPEN_API_PARAM_PATH -> path = it.value.toString()
-                    OPEN_API_PARAM_METHOD -> {
-                        methods = it.value as ArrayList<KSType>
+                var path = ""
+                var methods = arrayListOf<KSType>()
+                annotation.arguments.forEach {
+                    when (it.name?.getShortName()) {
+                        OPEN_API_PARAM_PATH -> path = it.value.toString()
+                        OPEN_API_PARAM_METHOD -> {
+                            methods = it.value as ArrayList<KSType>
+                        }
                     }
                 }
-            }
-            methods.forEach {
-                constructorSpec.addCode(CodeBlock.builder().addStatement(statement(it, path, classParam, function)).build())
+
+                methods.forEach {
+                    constructorSpec.addCode(CodeBlock.builder().addStatement(statement(it, path, classParam, function)).build())
+                }
             }
         }
 
@@ -78,6 +84,7 @@ class JavalinApiProcessor(private val logger: KSPLogger,
         const val OPEN_API_PACKAGE = "io.javalin.openapi"
         const val OPTION_GENERATED_PACKAGE = "javalin.processor.generated.package"
         const val OPTION_GENERATED_CLASS = "javalin.processor.generated.class"
+        const val OPTION_IGNORE_TYPE = "javalin.processor.ignore.type"
         const val DEFAULT_CLASS_NAME = "JavalinApi"
         const val JAVALIN_PACKAGE = "io.javalin"
         const val JAVALIN_NAME = "Javalin"

@@ -4,7 +4,7 @@ import org.jooq.SQLDialect
 import sql.JdbcConfig
 
 abstract class AppConfig {
-    private val port = System.getenv("APP_PORT")?.toInt() ?: 8080
+    private val port = System.getenv(APP_PORT)?.toInt() ?: defaultAppPort
 
     abstract fun env(): Env
 
@@ -21,11 +21,11 @@ abstract class AppConfig {
     }
 
     fun minThreads(): Int {
-        return 10
+        return defaultMinThreads
     }
 
     fun maxThreads(): Int {
-        return 200
+        return defaultMaxThreads
     }
 
     fun sqlDialect(): SQLDialect {
@@ -35,7 +35,15 @@ abstract class AppConfig {
     abstract fun jdbcConfig(): JdbcConfig
 
     companion object {
-        private const val APP_NAME = "Javalin service"
-        private const val VERSION = "1.0"
+        const val APP_NAME = "Javalin service"
+        const val VERSION = "1.0"
+        const val defaultMinPool = 10
+        const val defaultMaxPool = 100
+        const val defaultAcquireIncrement = 5
+        const val defaultIdleTestDuration = 10L
+        const val defaultMinThreads = 10
+        const val defaultMaxThreads = 200
+        const val APP_PORT = "APP_PORT"
+        const val defaultAppPort = 8080
     }
 }

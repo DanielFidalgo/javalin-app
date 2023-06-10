@@ -9,7 +9,7 @@ import infrastructure.config.StagingConfig
 import infrastructure.config.StubConfig
 import infrastructure.config.common.AppConfig
 import infrastructure.config.common.Env
-import infrastructure.resources.ItemResource
+import infrastructure.resources.UserResource
 import infrastructure.serialization.CustomJsonMapper
 import io.javalin.Javalin
 import web.JavalinFactory
@@ -78,7 +78,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesResources(appResource: ItemResource): ArrayList<Resource> {
+    fun providesResources(appResource: UserResource): ArrayList<Resource> {
         val list = ArrayList<Resource>()
         list.add(appResource)
         return list

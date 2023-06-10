@@ -12,7 +12,7 @@ class Application {
     @Inject
     lateinit var dataSource: DataSource
     @Inject
-    lateinit var resouraaaaa: ArrayList<Resource>
+    lateinit var resources: ArrayList<Resource>
     init {
         DaggerAppComponent.create().inject(this)
         FlywayMigrate.migrate(dataSource)

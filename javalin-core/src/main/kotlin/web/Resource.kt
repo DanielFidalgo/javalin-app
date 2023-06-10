@@ -28,13 +28,13 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
 
     open fun timedGet(name: String, path: String, handler: Handler) {
         javalin.get(path) {
-            timedHandler(name, handler, it)
+            handler.timed(name, it)
         }
     }
 
     open fun timedGet(name: String, handler: Handler) {
         ApiBuilder.get {
-            timedHandler(name, handler, it)
+            handler.timed(name, it)
         }
     }
 
@@ -48,13 +48,13 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
 
     open fun timedPost(name: String, path: String, handler: Handler) {
         javalin.post(path) {
-            timedHandler(name, handler, it)
+            handler.timed(name, it)
         }
     }
 
     open fun timedPost(name: String, handler: Handler) {
         ApiBuilder.post {
-            timedHandler(name, handler, it)
+            handler.timed(name, it)
         }
     }
 
@@ -66,12 +66,36 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
         ApiBuilder.patch(handler)
     }
 
+    open fun timedPatch(name: String, path: String, handler: Handler) {
+        javalin.patch(path) {
+            handler.timed(name, it)
+        }
+    }
+
+    open fun timedPatch(name: String, handler: Handler) {
+        ApiBuilder.patch {
+            handler.timed(name, it)
+        }
+    }
+
     open fun delete(path: String, handler: Handler) {
         javalin.delete(path, handler)
     }
 
     open fun delete(handler: Handler) {
         ApiBuilder.delete(handler)
+    }
+
+    open fun timedDelete(name: String, path: String, handler: Handler) {
+        javalin.delete(path) {
+            handler.timed(name, it)
+        }
+    }
+
+    open fun timedDelete(name: String, handler: Handler) {
+        ApiBuilder.delete {
+            handler.timed(name, it)
+        }
     }
 
     open fun put(path: String, handler: Handler) {
@@ -82,8 +106,24 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
         ApiBuilder.put(handler)
     }
 
+    open fun timedPut(name: String, path: String, handler: Handler) {
+        javalin.put(path) {
+            handler.timed(name, it)
+        }
+    }
+
+    open fun timedPut(name: String, handler: Handler) {
+        ApiBuilder.put {
+            handler.timed(name, it)
+        }
+    }
+
     open fun routes(endpointGroup: EndpointGroup): Javalin {
         return javalin.routes(endpointGroup)
+    }
+
+    open fun path(path: String, endpointGroup: EndpointGroup) {
+        return ApiBuilder.path(path, endpointGroup)
     }
 
     open fun before(path: String, handler: Handler): Javalin {
@@ -94,12 +134,36 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
         return javalin.before(handler)
     }
 
+    open fun timedBefore(name: String, path: String, handler: Handler) {
+        javalin.before(path) {
+            handler.timed(name, it)
+        }
+    }
+
+    open fun timedBefore(name: String, handler: Handler) {
+        javalin.before {
+            handler.timed(name, it)
+        }
+    }
+
     open fun after(path: String, handler: Handler): Javalin {
         return javalin.after(path, handler)
     }
 
     open fun after(handler: Handler): Javalin {
         return javalin.after(handler)
+    }
+
+    open fun timedAfter(name: String, path: String, handler: Handler) {
+        javalin.after(path) {
+            handler.timed(name, it)
+        }
+    }
+
+    open fun timedAfter(name: String, handler: Handler) {
+        javalin.after {
+            handler.timed(name, it)
+        }
     }
 
     open fun error(status: Int, handler: Handler): Javalin {
@@ -110,8 +174,26 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
         return javalin.error(status, contentType, handler)
     }
 
+    open fun timedError(name: String, status: Int, handler: Handler) {
+        javalin.error(status) {
+            handler.timed(name, it)
+        }
+    }
+
+    open fun timedError(name: String, status: Int, contentType: String, handler: Handler) {
+        javalin.error(status, contentType) {
+            handler.timed(name, it)
+        }
+    }
+
     open fun options(path: String, handler: Handler): Javalin {
         return javalin.options(path, handler)
+    }
+
+    open fun timedOptions(name: String, path: String, handler: Handler) {
+        javalin.options(path) {
+            handler.timed(name, it)
+        }
     }
 
     inline fun <reified T : Exception> exception(exceptionClass: Class<T>, exceptionHandler: ExceptionHandler<T>): Javalin {
@@ -122,8 +204,8 @@ abstract class Resource(val javalin: Javalin, private val registry: MeterRegistr
         return registry ?: throw RuntimeException(registryNotFound)
     }
 
-    private fun timedHandler(name: String, handler: Handler, context: Context) {
-        getRegistry().timer(name).recordCallable { handler.handle(context) }
+    private fun Handler.timed(name: String, context: Context) {
+        getRegistry().timer(name).recordCallable { this.handle(context) }
     }
 
     companion object {

@@ -6,7 +6,6 @@ import sql.JdbcConfig
 import java.time.Duration
 
 class StubConfig: AppConfig() {
-
     override fun env(): Env {
         return Env.STUB
     }
@@ -18,9 +17,9 @@ class StubConfig: AppConfig() {
             "sa",
             "",
             false,
-            10,
-            100,
-            5,
-            Duration.ofSeconds(10))
+            defaultMinPool,
+            defaultMaxPool,
+            defaultAcquireIncrement,
+            Duration.ofSeconds(defaultIdleTestDuration))
     }
 }
