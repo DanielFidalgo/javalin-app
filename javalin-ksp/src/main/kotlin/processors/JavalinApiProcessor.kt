@@ -36,7 +36,7 @@ class JavalinApiProcessor(private val logger: KSPLogger,
         override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Unit) {
             val declaration = function.parentDeclaration!! as KSClassDeclaration
             val superTypes = declaration.getAllSuperTypes()
-            var shouldParse = superTypes.none { s -> ignoredTypes.contains(s.toClassName().simpleName) }
+            val shouldParse = superTypes.none { s -> ignoredTypes.contains(s.toClassName().simpleName) }
             if (shouldParse) {
                 val annotation = function.annotations.first { it.shortName.asString() == OPEN_API }
                 val classParam = function.parentDeclaration?.simpleName?.asString()?.let {

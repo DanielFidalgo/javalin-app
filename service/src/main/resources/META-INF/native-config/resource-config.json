@@ -1,49 +1,78 @@
 {
   "resources":{
-  "includes":[{
-    "pattern":"\\QMETA-INF/maven/io.javalin/javalin/pom.properties\\E"
-  }, {
-    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/favicon-32x32.png\\E"
-  }, {
-    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/swagger-ui-bundle.js\\E"
-  }, {
-    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/swagger-ui-standalone-preset.js\\E"
-  }, {
-    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/swagger-ui.css\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/io.agroal.api.AgroalDataSourceProvider\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/org.eclipse.jetty.http.HttpFieldPreEncoder\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/org.eclipse.jetty.websocket.core.Extension\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/org.flywaydb.core.extensibility.Plugin\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
-  }, {
-    "pattern":"\\Qdb/migration/V001__InitialMigration.sql\\E"
-  }, {
-    "pattern":"\\Qdb/migration\\E"
-  }, {
-    "pattern":"\\Qopenapi-plugin/.index\\E"
-  }, {
-    "pattern":"\\Qopenapi-plugin/openapi-default.json\\E"
-  }, {
-    "pattern":"\\Qorg/eclipse/jetty/http/encoding.properties\\E"
-  }, {
-    "pattern":"\\Qorg/eclipse/jetty/http/mime.properties\\E"
-  }, {
-    "pattern":"\\Qorg/eclipse/jetty/version/build.properties\\E"
-  }, {
-    "pattern":"\\Qorg/flywaydb/core/internal/version.txt\\E"
-  }, {
-    "pattern":"\\Qorg/h2/util/data.zip\\E"
-  }]},
-  "bundles":[{
-    "name":"jakarta.servlet.LocalStrings",
-    "locales":["", "und"]
-  }, {
-    "name":"jakarta.servlet.http.LocalStrings",
-    "locales":["", "und"]
-  }]
+  "includes":[
+    {
+      "pattern":"\\QMETA-INF/maven/io.javalin/javalin/pom.properties\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/favicon-32x32.png\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/swagger-ui-bundle.js\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/swagger-ui-standalone-preset.js\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/3.52.5/swagger-ui.css\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/io.agroal.api.AgroalDataSourceProvider\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.eclipse.jetty.http.HttpFieldPreEncoder\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.eclipse.jetty.websocket.core.Extension\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.flywaydb.core.extensibility.Plugin\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
+    }, 
+    {
+      "pattern":"\\Qdb/migration/V001__InitialMigration.sql\\E"
+    }, 
+    {
+      "pattern":"\\Qdb/migration\\E"
+    }, 
+    {
+      "pattern":"\\Qopenapi-plugin/.index\\E"
+    }, 
+    {
+      "pattern":"\\Qopenapi-plugin/openapi-default.json\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/eclipse/jetty/http/encoding.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/eclipse/jetty/http/mime.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/eclipse/jetty/version/build.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/flywaydb/core/internal/version.txt\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/h2/util/data.zip\\E"
+    }
+  ]},
+  "bundles":[
+    {
+      "name":"jakarta.servlet.LocalStrings",
+      "locales":[
+        "", 
+        "und"
+      ]
+    }, 
+    {
+      "name":"jakarta.servlet.http.LocalStrings",
+      "locales":[
+        "", 
+        "und"
+      ]
+    }
+  ]
 }

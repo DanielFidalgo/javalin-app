@@ -25,26 +25,24 @@ internal class GraalVMResourceProvider(private val locations: Array<Location>) :
         }
     }
 
-    override fun getResources(prefix: String, suffixes: Array<String>): Collection<LoadableResource> {
-        try {
-            FileSystems.newFileSystem(URI.create("resource:/"), mapOf<String, Any?>()).use { fileSystem ->
-                val result: MutableList<LoadableResource> = ArrayList()
-                for (location in locations) {
-                    val path = fileSystem.getPath(location.path)
-                    Files.walk(path).use { files ->
-                        files
-                            .filter { path: Path? -> Files.isRegularFile(path) }
-                            .filter { file: Path -> file.fileName.toString().startsWith(prefix) }
-                            .filter { file: Path -> hasSuffix(file.fileName.toString(), suffixes) }
-                            .map { file: Path -> ClassPathResource(null, file.toString(), classLoader, StandardCharsets.UTF_8) }
-                            .forEach { e: LoadableResource -> result.add(e) }
-                    }
+    override fun getResources(prefix: String, suffixes: Array<String>): Collection<LoadableResource> = try {
+        FileSystems.newFileSystem(URI.create("resource:/"), mapOf<String, Any?>()).use { fileSystem ->
+            val result: MutableList<LoadableResource> = ArrayList()
+            for (location in locations) {
+                val path = fileSystem.getPath(location.path)
+                Files.walk(path).use { files ->
+                    files
+                        .filter { path: Path? -> Files.isRegularFile(path!!) }
+                        .filter { file: Path -> file.fileName.toString().startsWith(prefix) }
+                        .filter { file: Path -> hasSuffix(file.fileName.toString(), suffixes) }
+                        .map { file: Path -> ClassPathResource(null, file.toString(), classLoader, StandardCharsets.UTF_8) }
+                        .forEach { e: LoadableResource -> result.add(e) }
                 }
-                return result
             }
-        } catch (ex: IOException) {
-            throw UncheckedIOException(ex)
+            return result
         }
+    } catch (ex: IOException) {
+        throw UncheckedIOException(ex)
     }
 
     companion object {

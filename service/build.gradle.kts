@@ -8,7 +8,7 @@ plugins {
     id("org.graalvm.buildtools.native") version "0.9.21"
     id("com.google.cloud.tools.jib") version "3.3.1"
     id("com.google.devtools.ksp") version "1.8.20-1.0.11"
-    id("org.flywaydb.flyway") version "9.16.0"
+    id("org.flywaydb.flyway") version "9.20.0"
     id("nu.studer.jooq") version "8.2"
     id("io.gitlab.arturbosch.detekt") version "1.23.0"
     application
@@ -36,6 +36,7 @@ dependencies {
     kapt(libs.javalin.openapi.processor)
     implementation("com.h2database:h2:2.1.214")
     jooqGenerator("com.h2database:h2:2.1.214")
+    testImplementation(testLibs.jupiter)
     testImplementation(testLibs.jupiter.api)
     testRuntimeOnly(testLibs.jupiter.engine)
 }

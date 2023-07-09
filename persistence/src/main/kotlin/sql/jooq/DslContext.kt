@@ -9,5 +9,4 @@ class DslContext constructor(private val writerDS: DataSource, private val reade
 
     val writer: DSLContext = DSL.using(writerDS, dialect)
     val reader: DSLContext = DSL.using(readerDS, dialect)
-
 }

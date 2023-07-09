@@ -170,12 +170,26 @@
 },
 {
   "name":"com.sun.management.GcInfo",
-  "fields":[{"name":"builder"}, {"name":"extAttributes"}],
+  "fields":[
+    {"name":"builder"}, 
+    {"name":"extAttributes"}
+  ],
   "methods":[{"name":"getMemoryUsageBeforeGc","parameterTypes":[] }]
 },
 {
   "name":"com.sun.management.OperatingSystemMXBean",
-  "methods":[{"name":"getCpuLoad","parameterTypes":[] }, {"name":"getProcessCpuLoad","parameterTypes":[] }]
+  "methods":[
+    {"name":"getCpuLoad","parameterTypes":[] }, 
+    {"name":"getProcessCpuLoad","parameterTypes":[] }
+  ]
+},
+{
+  "name":"infrastructure.tables.pojos.Users",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"io.agroal.pool.ConnectionHandler",
@@ -192,7 +206,15 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"getContact","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getLicense","parameterTypes":[] }, {"name":"getSummary","parameterTypes":[] }, {"name":"getTermsOfService","parameterTypes":[] }, {"name":"getTitle","parameterTypes":[] }, {"name":"getVersion","parameterTypes":[] }]
+  "methods":[
+    {"name":"getContact","parameterTypes":[] }, 
+    {"name":"getDescription","parameterTypes":[] }, 
+    {"name":"getLicense","parameterTypes":[] }, 
+    {"name":"getSummary","parameterTypes":[] }, 
+    {"name":"getTermsOfService","parameterTypes":[] }, 
+    {"name":"getTitle","parameterTypes":[] }, 
+    {"name":"getVersion","parameterTypes":[] }
+  ]
 },
 {
   "name":"io.javalin.openapi.OpenApiLicense",
@@ -241,6 +263,11 @@
   "name":"java.lang.Long",
   "fields":[{"name":"TYPE"}],
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Object",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"java.lang.Short",
@@ -319,7 +346,10 @@
 },
 {
   "name":"java.util.concurrent.atomic.Striped64",
-  "fields":[{"name":"base"}, {"name":"cellsBusy"}]
+  "fields":[
+    {"name":"base"}, 
+    {"name":"cellsBusy"}
+  ]
 },
 {
   "name":"javax.management.ObjectName"
@@ -343,7 +373,12 @@
 },
 {
   "name":"org.eclipse.jetty.util.TypeUtil",
-  "methods":[{"name":"getClassLoaderLocation","parameterTypes":["java.lang.Class"] }, {"name":"getCodeSourceLocation","parameterTypes":["java.lang.Class"] }, {"name":"getModuleLocation","parameterTypes":["java.lang.Class"] }, {"name":"getSystemClassLoaderLocation","parameterTypes":["java.lang.Class"] }]
+  "methods":[
+    {"name":"getClassLoaderLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getCodeSourceLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getModuleLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getSystemClassLoaderLocation","parameterTypes":["java.lang.Class"] }
+  ]
 },
 {
   "name":"org.flywaydb.core.internal.logging.slf4j.Slf4jLogCreator",
@@ -465,7 +500,10 @@
 },
 {
   "name":"sun.security.provider.NativePRNG",
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }
+  ]
 },
 {
   "name":"sun.security.provider.SHA2$SHA256",

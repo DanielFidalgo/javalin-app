@@ -4,6 +4,7 @@ import api.UserApi
 import io.javalin.Javalin
 import web.Resource
 import io.javalin.http.Handler
+import io.javalin.openapi.HttpMethod
 import io.javalin.openapi.OpenApi
 import io.javalin.openapi.OpenApiParam
 import io.micrometer.core.instrument.MeterRegistry
@@ -20,12 +21,13 @@ class UserResource @Inject constructor(javalin: Javalin,
                 }
             }
         }
-
     }
 
     @OpenApi(path = "/user/{id}",
-        methods = [io.javalin.openapi.HttpMethod.GET],
-        pathParams = [OpenApiParam(name = "id", required = true)])
+             methods = [HttpMethod.GET],
+             pathParams = [OpenApiParam(name = "id",
+                                        required = true,
+                                        type = String::class)])
     private fun getUser() = Handler {
         val id = it.pathParam("id")
         userApi.getUser(id)
