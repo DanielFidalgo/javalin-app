@@ -1,5 +1,7 @@
 package infrastructure.cdi
 
+import com.github.fidalgotech.datasources.DatasourceFactory
+import com.github.fidalgotech.jooq.DslContext
 import dagger.Module
 import dagger.Provides
 import infrastructure.config.BetaConfig
@@ -20,8 +22,6 @@ import io.micrometer.core.instrument.MeterRegistry
 import io.micrometer.core.instrument.composite.CompositeMeterRegistry
 import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
-import sql.datasources.DatasourceFactory
-import sql.jooq.DslContext
 import javax.inject.Singleton
 import javax.sql.DataSource
 

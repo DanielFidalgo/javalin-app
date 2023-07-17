@@ -1,8 +1,8 @@
 package infrastructure.config
 
+import com.github.fidalgotech.JdbcConfig
 import infrastructure.config.common.AppConfig
 import infrastructure.config.common.Env
-import sql.JdbcConfig
 import java.time.Duration
 
 class StubConfig: AppConfig() {

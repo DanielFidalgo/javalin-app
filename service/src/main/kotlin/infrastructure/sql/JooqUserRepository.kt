@@ -1,10 +1,10 @@
 package infrastructure.sql
 
+import com.github.fidalgotech.jooq.DslContext
 import domain.users.User
 import domain.users.UserRepository
 import infrastructure.sql.serializers.UserSerializer
 import infrastructure.tables.daos.UsersDao
-import sql.jooq.DslContext
 import javax.inject.Inject
 
 class JooqUserRepository @Inject constructor(context: DslContext) : UserRepository {

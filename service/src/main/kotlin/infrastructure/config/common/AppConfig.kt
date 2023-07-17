@@ -1,7 +1,7 @@
 package infrastructure.config.common
 
+import com.github.fidalgotech.JdbcConfig
 import org.jooq.SQLDialect
-import sql.JdbcConfig
 
 abstract class AppConfig {
     private val port = System.getenv(APP_PORT)?.toInt() ?: defaultAppPort

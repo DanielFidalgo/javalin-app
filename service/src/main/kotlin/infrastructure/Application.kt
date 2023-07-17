@@ -1,8 +1,8 @@
 package infrastructure
 
+import com.github.fidalgotech.flyway.FlywayMigrate
 import infrastructure.cdi.DaggerAppComponent
 import web.Resource
-import sql.flyway.FlywayMigrate
 import javax.inject.Inject
 import javax.sql.DataSource
 

@@ -59,6 +59,7 @@ object JavalinFactory {
             it.spaRoot.addFile("/", this)
         }
         setup.customJsonMapper?.run(it::jsonMapper)
+
     }
 
     private fun setupOpenApi(config: JavalinConfig, setup: JavalinSetup) {
@@ -69,7 +70,6 @@ object JavalinFactory {
                 info.version = setup.version
             }
         }))
-
         val swagger = SwaggerConfiguration()
         swagger.documentationPath = docsPath
         config.plugins.register(SwaggerPlugin(swagger))

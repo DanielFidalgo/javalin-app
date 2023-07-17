@@ -3,7 +3,6 @@ rootProject.name = "javalin-app"
 include("service")
 include("javalin-core")
 include("javalin-ksp")
-include("persistence")
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -25,6 +24,7 @@ dependencyResolutionManagement {
             library("jooq", "org.jooq:jooq:3.18.5")
             library("agroal", "io.agroal:agroal-pool:2.2")
             library("flyway", "org.flywaydb:flyway-core:9.20.0")
+            library("sql","com.github.fidalgotech:sql:230717-031827")
         }
 
         create("testLibs") {
